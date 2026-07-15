@@ -89,13 +89,6 @@ no.addEventListener("touchstart", function (e) {
 }, { passive: false });
 
 
-// If she somehow catches it
-
-no.addEventListener("click", function () {
-
-    window.location.href = "no.html";
-
-});
 
 
 // When phone rotates
