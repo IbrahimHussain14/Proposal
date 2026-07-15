@@ -1,0 +1,59 @@
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:Poppins,sans-serif;
+display:flex;justify-content:center;align-items:center;
+min-height:100vh;overflow:hidden;
+background:linear-gradient(-45deg,#ffd6ec,#ffc3da,#ffe7f2,#ffcce5);
+background-size:400% 400%;
+animation:bg 12s ease infinite;
+}
+@keyframes bg{50%{background-position:100% 100%}}
+.card{
+width:min(92%,430px);
+padding:30px;
+background:rgba(255,255,255,.78);
+backdrop-filter:blur(14px);
+border-radius:30px;
+box-shadow:0 15px 40px rgba(255,105,180,.25);
+text-align:center;
+position:relative;
+z-index:2;
+}
+.teddy{
+font-size:170px;
+animation:bounce 2s ease-in-out infinite;
+filter:drop-shadow(0 10px 15px rgba(0,0,0,.15));
+}
+@keyframes bounce{50%{transform:translateY(-15px) rotate(-2deg)}}
+h1{font-family:Pacifico,cursive;color:#ff3f8e;margin-bottom:15px}
+p{min-height:110px;line-height:1.7;color:#444}
+.buttons{position:relative;height:110px}
+.yes,#no{
+padding:14px 28px;
+border:none;
+border-radius:999px;
+font-size:18px;
+font-weight:700;
+cursor:pointer;
+text-decoration:none;
+transition:.25s;
+}
+.yes{background:#ff4f9b;color:white;box-shadow:0 10px 20px rgba(255,79,155,.35)}
+.yes:hover{transform:scale(1.08)}
+#no{position:absolute;left:60%;background:white;color:#ff4f9b;border:2px solid #ff4f9b}
+.heart{
+position:fixed;
+font-size:20px;
+animation:float linear infinite;
+opacity:.5;
+}
+@keyframes float{
+from{transform:translateY(105vh)}
+to{transform:translateY(-20vh)}
+}
+#musicBtn{
+position:fixed;top:15px;right:15px;border:none;border-radius:50%;
+width:48px;height:48px;font-size:22px;background:white;z-index:5}
+.center{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;height:100vh}
+.big{font-size:5rem}
