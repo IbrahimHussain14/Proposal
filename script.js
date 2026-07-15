@@ -1,64 +1,107 @@
+// ---------- FLOATING HEARTS ----------
+
+for (let i = 0; i < 45; i++) {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    heart.innerHTML = Math.random() > 0.35 ? "💖" : "🌸";
+
+    heart.style.left = Math.random() * 100 + "vw";
+
+    heart.style.animationDuration = (7 + Math.random() * 8) + "s";
+
+    heart.style.animationDelay = (-Math.random() * 15) + "s";
+
+    heart.style.fontSize = (18 + Math.random() * 18) + "px";
+
+    document.body.appendChild(heart);
+
+}
+
+
+
+// ---------- NO BUTTON ----------
+
 const no = document.getElementById("no");
 
-const messages = [
-  "No 🙈",
-  "Really? 🤔",
-  "Think again 😜",
-  "Are you sure? 🥺",
-  "Catch me! 😂"
+const funny = [
+
+    "No 🙈",
+
+    "Really? 🤨",
+
+    "Think Again 😜",
+
+    "Catch Me 😂",
+
+    "Almost 😆",
+
+    "No Chance 😝"
+
 ];
 
-let index = 0;
+let current = 0;
 
-function moveButton() {
-  const padding = 20;
+function runAway() {
 
-  const maxX = window.innerWidth - no.offsetWidth - padding;
-  const maxY = window.innerHeight - no.offsetHeight - padding;
+    const margin = 25;
 
-  no.style.position = "fixed";
-  no.style.left = Math.random() * maxX + "px";
-  no.style.top = Math.random() * maxY + "px";
+    const width = window.innerWidth - no.offsetWidth - margin;
 
-  index = (index + 1) % messages.length;
-  no.textContent = messages[index];
+    const height = window.innerHeight - no.offsetHeight - margin;
+
+    const x = Math.random() * width;
+
+    const y = Math.random() * height;
+
+    no.style.left = x + "px";
+
+    no.style.top = y + "px";
+
+    current++;
+
+    if (current >= funny.length) current = 0;
+
+    no.innerHTML = funny[current];
+
 }
 
-if (no) {
-  // Desktop
-  no.addEventListener("mouseenter", moveButton);
+// Desktop
 
-  // Mobile
-  no.addEventListener(
-    "touchstart",
-    function (e) {
-      e.preventDefault();
-      moveButton();
-    },
-    { passive: false }
-  );
+no.addEventListener("mouseenter", runAway);
 
-  // Extra support for touch devices
-  no.addEventListener("pointerenter", moveButton);
-  no.addEventListener("pointerdown", function (e) {
+// Android Chrome
+
+no.addEventListener("pointerenter", runAway);
+
+no.addEventListener("pointermove", runAway);
+
+// Mobile
+
+no.addEventListener("touchstart", function (e) {
+
     e.preventDefault();
-    moveButton();
-  });
 
-  // If she somehow manages to click it
-  no.addEventListener("click", function () {
+    runAway();
+
+}, { passive: false });
+
+
+// If she somehow catches it
+
+no.addEventListener("click", function () {
+
     window.location.href = "no.html";
-  });
-}
 
-// Floating hearts
-for (let i = 0; i < 40; i++) {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = Math.random() > 0.4 ? "💖" : "🌸";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = 7 + Math.random() * 7 + "s";
-  heart.style.animationDelay = -Math.random() * 10 + "s";
-  heart.style.fontSize = 18 + Math.random() * 18 + "px";
-  document.body.appendChild(heart);
-}
+});
+
+
+// When phone rotates
+
+window.addEventListener("resize", function () {
+
+    runAway();
+
+});
