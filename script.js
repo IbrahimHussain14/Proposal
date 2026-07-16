@@ -1,71 +1,59 @@
-// ---------- FLOATING HEARTS ----------
+// ---------- Floating Hearts ----------
 
-for (let i = 0; i < 45; i++) {
+for (let i = 0; i < 35; i++) {
 
     const heart = document.createElement("div");
 
     heart.className = "heart";
 
-    heart.innerHTML = Math.random() > 0.35 ? "💖" : "🌸";
+    heart.innerHTML = Math.random() > 0.4 ? "💖" : "🌸";
 
     heart.style.left = Math.random() * 100 + "vw";
 
-    heart.style.animationDuration = (7 + Math.random() * 8) + "s";
+    heart.style.animationDuration = (7 + Math.random() * 7) + "s";
 
-    heart.style.animationDelay = (-Math.random() * 15) + "s";
+    heart.style.animationDelay = (-Math.random() * 10) + "s";
 
-    heart.style.fontSize = (18 + Math.random() * 18) + "px";
+    heart.style.fontSize = (18 + Math.random() * 16) + "px";
 
     document.body.appendChild(heart);
 
 }
 
-
-
-// ---------- NO BUTTON ----------
+// ---------- No Button ----------
 
 const no = document.getElementById("no");
 
-const funny = [
+let rightSide = true;
 
+const funnyTexts = [
     "No 🙈",
-
-    "Really? 🤨",
-
-    "Think Again 😜",
-
-    "Catch Me 😂",
-
+    "Nice try 😜",
+    "Catch me 😂",
     "Almost 😆",
-
-    "No Chance 😝"
-
+    "Think again 🤭"
 ];
 
-let current = 0;
+let textIndex = 0;
 
 function runAway() {
 
-    const margin = 25;
+    if (rightSide) {
 
-    const width = window.innerWidth - no.offsetWidth - margin;
+        no.style.right = "";
+        no.style.left = "0";
 
-    const height = window.innerHeight - no.offsetHeight - margin;
+    } else {
 
-    const x = Math.random() * width;
+        no.style.left = "";
+        no.style.right = "0";
 
-    const y = Math.random() * height;
+    }
 
-    no.style.left = x + "px";
+    rightSide = !rightSide;
 
-    no.style.top = y + "px";
-
-    current++;
-
-    if (current >= funny.length) current = 0;
-
-    no.innerHTML = funny[current];
-
+    textIndex = (textIndex + 1) % funnyTexts.length;
+    no.innerHTML = funnyTexts[textIndex];
 }
 
 // Desktop
@@ -73,13 +61,6 @@ no.addEventListener("mouseenter", runAway);
 
 // Mobile
 no.addEventListener("touchstart", function (e) {
-    e.preventDefault();
-    runAway();
-}, { passive: false });
-
-// Mobile
-
-no.addEventListener("touchstart", function (e) {
 
     e.preventDefault();
 
@@ -87,3 +68,11 @@ no.addEventListener("touchstart", function (e) {
 
 }, { passive: false });
 
+// If somehow tapped
+no.addEventListener("click", function (e) {
+
+    e.preventDefault();
+
+    runAway();
+
+});
