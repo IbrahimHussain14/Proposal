@@ -43,9 +43,11 @@ function move() {
 
     const container = document.querySelector(".buttons");
 
+    const startX = container.clientWidth * 0.55;
+
     const maxX = container.clientWidth - no.offsetWidth;
 
-    const x = Math.random() * maxX;
+    const x = startX + Math.random() * (maxX - startX);
 
     no.style.position = "absolute";
     no.style.left = x + "px";
